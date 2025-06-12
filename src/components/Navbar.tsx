@@ -14,8 +14,8 @@ export default function Navbar() {
     ];
 
     return (
-        <header className="w-full bg-white backdrop-blur-md sticky top-0 z-50">
-            <div className="max-w-7xl mx-auto px-6 flex h-16 items-center justify-between">
+        <header className="w-full bg-white sticky top-0 z-50">
+            <div className="max-w-7xl mx-auto px-4 flex h-16 items-center justify-between">
                 <Link href="/" className="flex items-center" aria-label="NextSalon homepage">
                     <div className="w-32 h-8">
                         <Image

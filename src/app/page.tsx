@@ -1,103 +1,83 @@
-import Image from "next/image";
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+export default function HomePage() {
+    return (
+        <div className="min-h-screen bg-white">
+            {/* Hero Section */}
+            <div className="max-w-6xl mx-auto px-4">
+                <div className="pt-32 pb-40">
+                    <div className="max-w-4xl">
+                        <h1 className="font-jakarta text-6xl md:text-8xl font-bold text-black mb-12 leading-none tracking-tighter">
+                            Your <span className="text-black">Salon</span>,<br />
+                            Your <span className="text-[#FF3B30]">Voice</span>
+                        </h1>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+                        <div className="mb-16">
+                            <p className="font-manrope text-2xl md:text-3xl text-gray-600 leading-relaxed font-medium">
+                                Share your experience with our team. Your honest feedback helps us create the perfect salon experience for you.
+                            </p>
+                        </div>
+
+                        <div className="flex flex-col sm:flex-row gap-6">
+                            <Link
+                                href="/report"
+                                className="inline-flex items-center gap-8 bg-black text-white px-12 py-6 font-manrope font-semibold text-xl hover:bg-gray-900 transition-all duration-300 group"
+                            >
+                                Give Feedback
+                                <ArrowRight className="h-6 w-6 group-hover:translate-x-1 transition-transform duration-300" />
+                            </Link>
+
+                            <a
+                                href="https://wa.me/2348066624849?text=Hi%2C%20I%20would%20like%20to%20share%20feedback%20about%20my%20salon%20experience"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-4 text-black px-12 py-6 border-2 border-black font-manrope font-semibold text-xl hover:bg-black hover:text-white transition-all duration-300 group"
+                            >
+                                Tell Us on WhatsApp
+                                <FaWhatsapp className="h-6 w-6 group-hover:scale-110 transition-transform duration-300" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Feature Section */}
+            <div className="bg-white py-40">
+                <div className="max-w-6xl mx-auto px-4">
+                    <div className="max-w-5xl mb-12">
+                        <h2 className="font-jakarta text-5xl mb-12 md:text-6xl font-bold text-gray-600 leading-[1.2] tracking-tight">
+                            Why Your <br />
+                            <span className="text-[#FF3B30]">Feedback</span> <br /> Matters
+                        </h2>
+
+                        <p className="font-manrope text-2xl md:text-3xl text-gray-600 leading-relaxed font-medium mb-12">
+                            We are committed to providing an excellent experience from the very beginning. Your insights help us understand what we're doing right and where we can improve to make every visit exceptional.
+                        </p>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row gap-6">
+                        <Link
+                            href="/report"
+                            className="inline-flex items-center gap-4 text-black px-12 py-6 border-2 border-black font-manrope font-semibold text-xl hover:bg-black hover:text-white transition-all duration-300 group"
+                        >
+                            Give Feedback
+                            <ArrowRight className="h-6 w-6 group-hover:translate-x-1 transition-transform duration-300" />
+                        </Link>
+
+                        <a
+                            href="https://wa.me/2348066624849?text=Hi%2C%20I%20would%20like%20to%20share%20feedback%20about%20my%20salon%20experience"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-4 bg-green-500 text-white px-12 py-6 font-manrope font-semibold text-xl hover:bg-green-600 transition-all duration-300 group"
+                        >
+                            Tell Us on WhatsApp
+                            <FaWhatsapp className="h-6 w-6 group-hover:scale-110 transition-transform duration-300" />
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+    );
 }

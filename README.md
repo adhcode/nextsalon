@@ -1,36 +1,200 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NextSalon - Customer Feedback Platform
 
-## Getting Started
+A modern, clean feedback platform for salon customers to share their experiences with staff members.
 
-First, run the development server:
+## Features
+
+- ✨ Clean, modern UI design
+- 📱 Fully responsive
+- 🔒 Confidential feedback submission
+- ✅ Form validation with error handling
+- 📧 Email notifications to salon owner
+- 💾 Supabase database storage
+- 📅 Custom calendar component
+- 🚀 Built with Next.js 14 and TypeScript
+
+## Tech Stack
+
+- **Framework**: Next.js 14 with App Router
+- **Styling**: Tailwind CSS
+- **Forms**: React Hook Form with Zod validation
+- **Icons**: Lucide React
+- **Database**: Supabase
+- **Calendar**: React Calendar
+- **Email**: Ready for Resend integration
+
+## Quick Setup
+
+1. **Clone and install**
+
+   ```bash
+   git clone <repository-url>
+   cd nextsalon
+   npm install
+   ```
+
+2. **Environment variables**
+   Create `.env.local`:
+
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+
+3. **Set up Supabase database**
+
+   - Go to your Supabase project
+   - Open the SQL Editor
+   - Run the SQL from `supabase-setup.sql`
+
+4. **Run the project**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Supabase Database Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 1. Create the Table
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Run this SQL in your Supabase SQL Editor:
 
-## Learn More
+```sql
+CREATE TABLE feedback (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  name TEXT NOT NULL,
+  staff TEXT NOT NULL,
+  visit_date DATE,
+  feedback TEXT NOT NULL,
+  contact TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 2. Set up Security
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```sql
+-- Enable Row Level Security
+ALTER TABLE feedback ENABLE ROW LEVEL SECURITY;
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+-- Allow anonymous feedback submission
+CREATE POLICY "Allow anonymous feedback submission" ON feedback
+  FOR INSERT WITH CHECK (true);
+```
 
-## Deploy on Vercel
+### 3. Create Indexes (Optional)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```sql
+CREATE INDEX idx_feedback_created_at ON feedback(created_at DESC);
+CREATE INDEX idx_feedback_staff ON feedback(staff);
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Email Integration (Optional)
+
+### Using Resend
+
+1. **Install Resend**
+
+   ```bash
+   npm install resend
+   ```
+
+2. **Add to environment**
+
+   ```env
+   RESEND_API_KEY=your_resend_api_key
+   ```
+
+3. **Update server action**
+   Uncomment the email code in `src/app/actions/feedback.ts` and add:
+   ```typescript
+   import { Resend } from "resend";
+   const resend = new Resend(process.env.RESEND_API_KEY);
+   ```
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── actions/
+│   │   └── feedback.ts          # Server action for form submission
+│   ├── report/
+│   │   └── page.tsx            # Feedback form page
+│   ├── globals.css             # Global styles + calendar styles
+│   ├── layout.tsx              # Root layout
+│   └── page.tsx                # Homepage
+├── components/
+│   ├── CustomCalendar.tsx      # Custom calendar component
+│   ├── Footer.tsx              # Footer with UVISE credit
+│   └── Navbar.tsx              # Navigation bar
+└── lib/
+    └── supabase.ts             # Supabase client configuration
+```
+
+## Features Explained
+
+### Custom Calendar
+
+- Built with `react-calendar`
+- Styled to match the website design
+- Prevents future date selection
+- Optional date clearing
+
+### Form Validation
+
+- Real-time validation with Zod
+- Character limits and requirements
+- Visual error indicators
+- Loading states during submission
+
+### Database Storage
+
+- Automatic UUID generation
+- Timestamp tracking
+- Optional visit date and contact info
+- Row Level Security enabled
+
+## Customization
+
+### Styling
+
+- Primary color: `#FF3B30` (red)
+- Change colors in `tailwind.config.js`
+- Calendar styles in `globals.css`
+
+### Form Fields
+
+- Modify validation in `src/app/actions/feedback.ts`
+- Update form UI in `src/app/report/page.tsx`
+- Add/remove fields as needed
+
+### Database Schema
+
+- Modify table structure in Supabase
+- Update TypeScript types in `src/lib/supabase.ts`
+
+## Deployment
+
+### Vercel (Recommended)
+
+1. Push to GitHub
+2. Connect to Vercel
+3. Add environment variables
+4. Deploy
+
+### Environment Variables for Production
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+RESEND_API_KEY=your_resend_api_key (optional)
+```
+
+## Credits
+
+Built by [UVISE](https://uvise.ng)
+
+## License
+
+MIT License - feel free to use this project for your salon or business.

@@ -12,7 +12,13 @@ import { submitFeedback } from '../actions/feedback';
 
 const feedbackSchema = z.object({
     name: z.string().min(2, 'Name must be at least 2 characters').max(50),
-    staff: z.string().min(2, 'Staff name must be at least 2 characters').max(50),
+    staff: z
+        .string()
+        .max(50, 'Staff name must be at most 50 characters')
+        .optional()
+        .refine((val) => val === undefined || val.trim().length === 0 || val.trim().length >= 2, {
+            message: 'Staff name must be at least 2 characters',
+        }),
     visitDate: z.string().optional(),
     feedback: z.string().min(10, 'Feedback must be at least 10 characters').max(1000),
     contact: z.string().optional(),
@@ -26,7 +32,7 @@ export default function ReportPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitMessage, setSubmitMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
     const [showConfirmationModal, setShowConfirmationModal] = useState(false);
-    const [submittedData, setSubmittedData] = useState<{ name: string; staff: string } | null>(null);
+    const [submittedData, setSubmittedData] = useState<{ name: string; staff?: string } | null>(null);
 
     const {
         register,
@@ -47,7 +53,7 @@ export default function ReportPage() {
         try {
             const formData = new FormData();
             formData.append('name', data.name);
-            formData.append('staff', data.staff);
+            formData.append('staff', data.staff || '');
             formData.append('visitDate', selectedDate ? selectedDate.toISOString().split('T')[0] : '');
             formData.append('feedback', data.feedback);
             formData.append('contact', data.contact || '');
@@ -91,7 +97,7 @@ export default function ReportPage() {
                         <div className="mb-16">
                             <h1 className="font-jakarta text-6xl md:text-8xl font-bold text-black mb-12 leading-none tracking-tighter">
                                 Share Your<br />
-                                <span className="text-[#FF3B30]">Experience</span>
+                                <span className="text-[#29B522]">Experience</span>
                             </h1>
                             <p className="font-manrope text-2xl md:text-3xl text-gray-600 leading-relaxed font-medium">
                                 Help us improve by sharing your honest feedback about our staff and services.
@@ -103,7 +109,7 @@ export default function ReportPage() {
                                 {/* Name Field */}
                                 <div>
                                     <label htmlFor="name" className="block font-jakarta text-xl font-bold text-black mb-6">
-                                        Your Name <span className="text-[#FF3B30]">*</span>
+                                        Your Name <span className="text-[#29B522]">*</span>
                                     </label>
                                     <input
                                         {...register('name')}
@@ -113,24 +119,24 @@ export default function ReportPage() {
                                         placeholder="Enter your name"
                                     />
                                     {errors.name && (
-                                        <p className="mt-3 font-manrope text-sm text-[#FF3B30]">{errors.name.message}</p>
+                                        <p className="mt-3 font-manrope text-sm text-[#29B522]">{errors.name.message}</p>
                                     )}
                                 </div>
 
-                                {/* Staff Member Field */}
+                                {/* Staff Member Field (Optional) */}
                                 <div>
                                     <label htmlFor="staff" className="block font-jakarta text-xl font-bold text-black mb-6">
-                                        Staff Member <span className="text-[#FF3B30]">*</span>
+                                        Staff Member (Optional)
                                     </label>
                                     <input
                                         {...register('staff')}
                                         type="text"
                                         id="staff"
                                         className="w-full h-16 px-4 py-4 border-2 border-gray-300 focus:ring-0 focus:border-black transition-all duration-200 text-black placeholder-gray-400 bg-white font-manrope text-xl"
-                                        placeholder="Enter staff member's name"
+                                        placeholder="Enter staff member's name (optional)"
                                     />
                                     {errors.staff && (
-                                        <p className="mt-3 font-manrope text-sm text-[#FF3B30]">{errors.staff.message}</p>
+                                        <p className="mt-3 font-manrope text-sm text-[#29B522]">{errors.staff.message}</p>
                                     )}
                                 </div>
 
@@ -178,7 +184,7 @@ export default function ReportPage() {
                                 {/* Feedback Field */}
                                 <div>
                                     <label htmlFor="feedback" className="block font-jakarta text-xl font-bold text-black mb-6">
-                                        Your Feedback <span className="text-[#FF3B30]">*</span>
+                                        Your Feedback <span className="text-[#29B522]">*</span>
                                     </label>
                                     <textarea
                                         {...register('feedback')}
@@ -189,7 +195,7 @@ export default function ReportPage() {
                                     />
                                     <div className="flex justify-between items-center mt-3">
                                         {errors.feedback && (
-                                            <p className="font-manrope text-sm text-[#FF3B30]">{errors.feedback.message}</p>
+                                            <p className="font-manrope text-sm text-[#29B522]">{errors.feedback.message}</p>
                                         )}
                                         <p className="font-manrope text-sm text-gray-500 ml-auto">
                                             {feedbackValue.length}/1000 characters
@@ -210,7 +216,7 @@ export default function ReportPage() {
                                         placeholder="Enter your email for follow-up (optional)"
                                     />
                                     {errors.contact && (
-                                        <p className="mt-3 font-manrope text-sm text-[#FF3B30]">{errors.contact.message}</p>
+                                        <p className="mt-3 font-manrope text-sm text-[#29B522]">{errors.contact.message}</p>
                                     )}
                                 </div>
 
@@ -235,7 +241,7 @@ export default function ReportPage() {
                                         <button
                                             type="submit"
                                             disabled={isSubmitting}
-                                            className="inline-flex items-center gap-4 bg-black text-white px-12 py-6 font-manrope font-semibold text-xl hover:bg-gray-900 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed group"
+                                            className="inline-flex items-center justify-center gap-3 bg-black text-white px-12 py-6 rounded-lg font-manrope font-semibold text-xl hover:bg-gray-900 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed group shadow-lg hover:shadow-xl"
                                         >
                                             {isSubmitting ? (
                                                 <>
@@ -251,10 +257,10 @@ export default function ReportPage() {
                                         </button>
 
                                         <a
-                                            href="https://wa.me/2348066624849?text=Hi%2C%20I%20would%20like%20to%20share%20feedback%20about%20my%20salon%20experience"
+                                            href="https://wa.me/2347085901944?text=Hi%2C%20I%20would%20like%20to%20share%20feedback%20about%20my%20salon%20experience"
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="inline-flex items-center gap-4 text-black px-12 py-6 border-2 border-black font-manrope font-semibold text-xl hover:bg-black hover:text-white transition-all duration-300 group"
+                                            className="inline-flex items-center justify-center gap-3 text-black px-12 py-6 border-2 border-black rounded-lg font-manrope font-semibold text-xl hover:bg-black hover:text-white transition-all duration-300 group shadow-lg hover:shadow-xl"
                                         >
                                             Tell Us on WhatsApp
                                             <FaWhatsapp className="h-6 w-6 group-hover:scale-110 transition-transform duration-300" />

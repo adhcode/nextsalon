@@ -4,12 +4,16 @@
 CREATE TABLE IF NOT EXISTS public.feedback (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   name TEXT NOT NULL,
-  staff TEXT NOT NULL,
+  staff TEXT,
   visit_date DATE,
   feedback TEXT NOT NULL,
   contact TEXT,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
+
+-- If the table already exists, ensure the staff column is nullable
+ALTER TABLE public.feedback
+  ALTER COLUMN staff DROP NOT NULL;
 
 -- Create an index on created_at for better query performance
 CREATE INDEX idx_feedback_created_at ON feedback(created_at DESC);

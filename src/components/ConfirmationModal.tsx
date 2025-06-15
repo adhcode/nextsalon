@@ -8,7 +8,7 @@ interface ConfirmationModalProps {
     isOpen: boolean;
     onClose: () => void;
     customerName: string;
-    staffName: string;
+    staffName?: string;
 }
 
 export default function ConfirmationModal({
@@ -71,7 +71,9 @@ export default function ConfirmationModal({
                     </h3>
 
                     <p className="font-manrope text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
-                        Your feedback about {staffName} has been submitted. We appreciate you taking the time to help us improve.
+                        {staffName && staffName.trim().length > 0
+                            ? `Your feedback about ${staffName} has been submitted. We appreciate you taking the time to help us improve.`
+                            : 'Your feedback has been submitted. We appreciate you taking the time to help us improve.'}
                     </p>
 
                     {/* Action buttons */}
@@ -84,10 +86,10 @@ export default function ConfirmationModal({
                         </button>
 
                         <a
-                            href="https://wa.me/2348066624849?text=Hi%2C%20I%20just%20submitted%20feedback%20and%20wanted%20to%20share%20more%20thoughts"
+                            href="https://wa.me/2347085901944?text=Hi%2C%20I%20just%20submitted%20feedback%20and%20wanted%20to%20share%20more%20thoughts"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center justify-center gap-3 bg-green-500 text-white px-8 py-3 font-manrope font-semibold text-lg hover:bg-green-600 transition-all duration-300 group"
+                            className="inline-flex items-center justify-center gap-3 bg-[#29B522] text-white px-8 py-3 font-manrope font-semibold text-lg hover:bg-green-600 transition-all duration-300 group"
                         >
                             Chat on WhatsApp
                             <FaWhatsapp className="h-5 w-5 group-hover:scale-110 transition-transform duration-300" />

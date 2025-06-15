@@ -11,7 +11,7 @@ export default function Footer() {
                     <p className="font-manrope text-base text-gray-600">
                         Built by{' '}
                         <a
-                            href="https://uvise.ng"
+                            href="https://www.instagram.com/uvise.ng/?igsh=MXQweDRtcmhvazFrNw%3D%3D#"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="font-semibold text-[#FF3B30] hover:text-black transition-colors duration-200"

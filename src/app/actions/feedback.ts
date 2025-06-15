@@ -5,7 +5,13 @@ import { supabase } from '../../lib/supabase';
 
 const feedbackSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters').max(50),
-  staff: z.string().min(2, 'Staff name must be at least 2 characters').max(50),
+  staff: z
+    .string()
+    .max(50, 'Staff name must be at most 50 characters')
+    .optional()
+    .refine((val) => val === undefined || val.trim().length === 0 || val.trim().length >= 2, {
+      message: 'Staff name must be at least 2 characters',
+    }),
   visitDate: z.string().optional(),
   feedback: z.string().min(10, 'Feedback must be at least 10 characters').max(1000),
   contact: z.string().optional(),
@@ -40,7 +46,7 @@ export async function submitFeedback(formData: FormData) {
       .insert([
         {
           name: validatedData.name,
-          staff: validatedData.staff,
+          staff: validatedData.staff && validatedData.staff.trim().length > 0 ? validatedData.staff : null,
           visit_date: validatedData.visitDate || null,
           feedback: validatedData.feedback,
           contact: validatedData.contact || null,

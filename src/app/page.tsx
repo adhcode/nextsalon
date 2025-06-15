@@ -23,17 +23,17 @@ export default function HomePage() {
                         <div className="flex flex-col sm:flex-row gap-6">
                             <Link
                                 href="/report"
-                                className="inline-flex items-center gap-8 bg-black text-white px-12 py-6 font-manrope font-semibold text-xl hover:bg-gray-900 transition-all duration-300 group"
+                                className="inline-flex items-center justify-center gap-3 bg-black text-white px-12 py-6 rounded-lg font-manrope font-semibold text-xl hover:bg-gray-900 transition-all duration-300 group shadow-lg hover:shadow-xl"
                             >
                                 Give Feedback
                                 <ArrowRight className="h-6 w-6 group-hover:translate-x-1 transition-transform duration-300" />
                             </Link>
 
                             <a
-                                href="https://wa.me/2348066624849?text=Hi%2C%20I%20would%20like%20to%20share%20feedback%20about%20my%20salon%20experience"
+                                href="https://wa.me/2347085901944?text=Hi%2C%20I%20would%20like%20to%20share%20feedback%20about%20my%20salon%20experience"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-4 text-black px-12 py-6 border-2 border-black font-manrope font-semibold text-xl hover:bg-black hover:text-white transition-all duration-300 group"
+                                className="inline-flex items-center justify-center gap-3 text-black px-12 py-6 border-2 border-black rounded-lg font-manrope font-semibold text-xl hover:bg-black hover:text-white transition-all duration-300 group shadow-lg hover:shadow-xl"
                             >
                                 Tell Us on WhatsApp
                                 <FaWhatsapp className="h-6 w-6 group-hover:scale-110 transition-transform duration-300" />
@@ -60,17 +60,17 @@ export default function HomePage() {
                     <div className="flex flex-col sm:flex-row gap-6">
                         <Link
                             href="/report"
-                            className="inline-flex items-center gap-4 text-black px-12 py-6 border-2 border-black font-manrope font-semibold text-xl hover:bg-black hover:text-white transition-all duration-300 group"
+                            className="inline-flex items-center justify-center gap-3 text-black px-12 py-6 border-2 border-black rounded-lg font-manrope font-semibold text-xl hover:bg-black hover:text-white transition-all duration-300 group shadow-lg hover:shadow-xl"
                         >
                             Give Feedback
                             <ArrowRight className="h-6 w-6 group-hover:translate-x-1 transition-transform duration-300" />
                         </Link>
 
                         <a
-                            href="https://wa.me/2348066624849?text=Hi%2C%20I%20would%20like%20to%20share%20feedback%20about%20my%20salon%20experience"
+                            href="https://wa.me/2347085901944?text=Hi%2C%20I%20would%20like%20to%20share%20feedback%20about%20my%20salon%20experience"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-4 bg-[#29B522] text-white px-12 py-6 font-manrope font-semibold text-xl hover:bg-green-600 transition-all duration-300 group"
+                            className="inline-flex items-center justify-center gap-3 bg-[#29B522] text-white px-12 py-6 rounded-lg font-manrope font-semibold text-xl hover:bg-green-600 transition-all duration-300 group shadow-lg hover:shadow-xl"
                         >
                             Tell Us on WhatsApp
                             <FaWhatsapp className="h-6 w-6 group-hover:scale-110 transition-transform duration-300" />

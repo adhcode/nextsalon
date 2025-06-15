@@ -69,7 +69,7 @@ export default function CustomCalendar({ selectedDate, onDateSelect, onClose }: 
                 
                 .custom-calendar .react-calendar__navigation button:hover {
                     background-color: #f3f4f6;
-                    color: #FF3B30;
+                    color: #29B522;
                 }
                 
                 .custom-calendar .react-calendar__navigation button:disabled {
@@ -101,17 +101,17 @@ export default function CustomCalendar({ selectedDate, onDateSelect, onClose }: 
                 
                 .custom-calendar .react-calendar__tile:hover {
                     background-color: #f3f4f6;
-                    color: #FF3B30;
+                    color: #29B522;
                 }
                 
                 .custom-calendar .react-calendar__tile--active {
-                    background-color: #FF3B30 !important;
+                    background-color: #29B522 !important;
                     color: white !important;
                 }
                 
                 .custom-calendar .react-calendar__tile--now {
                     background-color: #fef2f2;
-                    color: #FF3B30;
+                    color: #29B522;
                     font-weight: 600;
                 }
                 
